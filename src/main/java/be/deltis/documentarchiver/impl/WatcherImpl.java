@@ -35,14 +35,18 @@ import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 public class WatcherImpl implements Watcher {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
-
     private String suffix;
-    private List<Context> contexts;
     private Processor processor;
+    private WatchService watcher ;
 
     private Map<Path, Context> contextMap = new HashMap<>();
 
     public WatcherImpl() {
+        try {
+            watcher = FileSystems.getDefault().newWatchService();
+        } catch (IOException ioe) {
+            throw new RuntimeException("Failed to create new watch service", ioe);
+        }
     }
 
     public String getSuffix() {
@@ -53,69 +57,66 @@ public class WatcherImpl implements Watcher {
         this.suffix = suffix;
     }
 
-    public List<Context> getContexts() {
-        return contexts;
-    }
-
     public void setContexts(List<Context> contexts) {
-        this.contexts = contexts;
-    }
-
-    @Override
-    public void startProcessing() throws IOException {
-        WatchService watcher = FileSystems.getDefault().newWatchService();
-
         for (Context context : contexts) {
             logger.info("Starting to watch directory {}", context.getDirectory());
             Path dirPath = FileSystems.getDefault().getPath(context.getDirectory());
             contextMap.put(dirPath, context);
-
             try {
                 dirPath.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
             } catch (IOException ioe) {
-                logger.error("Failed to register the directory", ioe);
-                throw ioe;
+                RuntimeException re = new RuntimeException("Failed to register the directory", ioe);
+                logger.error("Failed to register the directory", re);
+                throw re;
             }
         }
+    }
 
-        for (; ; ) {
+    public Processor getProcessor() {
+        return processor;
+    }
 
-            // wait for key to be signaled
-            WatchKey key;
-            try {
-                key = watcher.take();
-            } catch (InterruptedException x) {
-                return;
+    public void setProcessor(Processor processor) {
+        this.processor = processor;
+    }
+
+    public boolean takeOneFile() {
+        // wait for key to be signaled
+        WatchKey key;
+        try {
+            key = watcher.take();
+        } catch (InterruptedException x) {
+            return false;
+        }
+        for (WatchEvent<?> event : key.pollEvents()) {
+            WatchEvent.Kind<?> kind = event.kind();
+
+            // This key is registered only
+            // for ENTRY_CREATE events,
+            // but an OVERFLOW event can
+            // occur regardless if events
+            // are lost or discarded.
+            if (kind == OVERFLOW) {
+                continue;
             }
 
-
-            for (WatchEvent<?> event : key.pollEvents()) {
-                WatchEvent.Kind<?> kind = event.kind();
-
-                // This key is registered only
-                // for ENTRY_CREATE events,
-                // but an OVERFLOW event can
-                // occur regardless if events
-                // are lost or discarded.
-                if (kind == OVERFLOW) {
-                    continue;
-                }
-
-                // The filename is the
-                // context of the event.
-                WatchEvent<Path> ev = (WatchEvent<Path>) event;
-                Path filename = ev.context();
-                if (filename.toString().endsWith(suffix)) {
-                    Path dirPath = filename.getParent();
-                    processor.processFile(contextMap.get(dirPath), filename.toString());
-                }
+            // The filename is the
+            // context of the event.
+            WatchEvent<Path> ev = (WatchEvent<Path>) event;
+            Path filename = ev.context();
+            if (filename.toString().endsWith(suffix)) {
+                processor.processFile(filename.toString());
             }
-
-            boolean valid = key.reset();
+        }
+        return key.reset();
+    }
+    @Override
+    public void startProcessing() throws IOException {
+        for (;;) {
+            boolean valid = takeOneFile() ;
             if (!valid) {
-                break;
+                break ;
             }
-
         }
     }
 }

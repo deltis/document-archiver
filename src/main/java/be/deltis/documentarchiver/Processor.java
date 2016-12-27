@@ -20,5 +20,5 @@ package be.deltis.documentarchiver;
  */
 public interface Processor {
 
-    void processFile(Context context, String filename) ;
+    void processFile(String filename) ;
 }
