@@ -15,6 +15,8 @@
  */
 package be.deltis.documentarchiver;
 
+import be.deltis.documentarchiver.context.Context;
+
 import java.nio.file.Path;
 
 /**

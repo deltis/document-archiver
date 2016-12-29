@@ -15,9 +15,9 @@
  */
 package be.deltis.documentarchiver.impl;
 
-import be.deltis.documentarchiver.Context;
+import be.deltis.documentarchiver.context.Context;
 import be.deltis.documentarchiver.Processor;
-import be.deltis.documentarchiver.Source;
+import be.deltis.documentarchiver.context.Source;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
