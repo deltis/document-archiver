@@ -56,7 +56,7 @@ public class WatcherImplTest {
         watcher.setContexts(Collections.singletonList(new Context(Source.EMAIL, testDir)));
         watcher.setSuffix(".pdf");
 
-        Path testFile = FileHelper.createTempFile(testDir, this);
+        FileHelper.createTempFile(testDir, this);
 
         watcher.takeOneFile();
         verify(processor).processFile(any(Path.class), any(Context.class));
