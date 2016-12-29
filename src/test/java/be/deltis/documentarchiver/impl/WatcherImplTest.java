@@ -62,10 +62,5 @@ public class WatcherImplTest {
         verify(processor).processFile(any(Path.class), any(Context.class));
 
         FileHelper.deleteDir(testDir, this);
-
-        /*
-        Files.deleteIfExists(testFile);
-        Files.deleteIfExists(testDir);
-        */
     }
 }
