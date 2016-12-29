@@ -15,14 +15,13 @@
  */
 package be.deltis.documentarchiver.impl;
 
-import be.deltis.documentarchiver.context.Context;
 import be.deltis.documentarchiver.Processor;
+import be.deltis.documentarchiver.context.Context;
 import be.deltis.documentarchiver.context.Source;
+import be.deltis.documentarchiver.helper.FileHelper;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -40,9 +39,6 @@ import static org.mockito.Mockito.verify;
 @Test
 public class WatcherImplTest {
 
-    private final String PREFIX = "UnitTestDocs" + this.getClass().getSimpleName();
-    private Logger logger = LoggerFactory.getLogger(getClass());
-
     @InjectMocks
     private WatcherImpl watcher = new WatcherImpl();
 
@@ -55,20 +51,21 @@ public class WatcherImplTest {
     }
 
     public void takeOneFile() throws Exception {
-        Path testDir = Files.createTempDirectory(PREFIX);
-        logger.debug("Creating dir {}", testDir);
+        Path testDir = FileHelper.createTempDirectory(this);
 
         watcher.setContexts(Collections.singletonList(new Context(Source.EMAIL, testDir)));
         watcher.setSuffix(".pdf");
 
-
-        Path testFile = Files.createTempFile(testDir, PREFIX, ".pdf");
-        logger.debug("Creating file {}", testFile);
+        Path testFile = FileHelper.createTempFile(testDir, this);
 
         watcher.takeOneFile();
         verify(processor).processFile(any(Path.class), any(Context.class));
 
+        FileHelper.deleteDir(testDir, this);
+
+        /*
         Files.deleteIfExists(testFile);
         Files.deleteIfExists(testDir);
+        */
     }
 }

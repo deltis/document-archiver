@@ -18,9 +18,7 @@ package be.deltis.documentarchiver.impl;
 import be.deltis.documentarchiver.Processor;
 import be.deltis.documentarchiver.context.Context;
 import be.deltis.documentarchiver.context.Source;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testng.Assert;
+import be.deltis.documentarchiver.helper.FileHelper;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -35,25 +33,17 @@ import static org.testng.Assert.assertTrue;
 @Test
 public class SimpleCopyProcessorTest {
 
-    private final String PREFIX = "UnitTestDocs" + this.getClass().getSimpleName();
-    private Logger logger = LoggerFactory.getLogger(getClass());
-
     private Processor processor ;
 
     public void copy() throws IOException {
-        Path targetDirectory = Files.createTempDirectory(PREFIX);
-        logger.debug("Creating target dir {}", targetDirectory);
+        Path targetDirectory = FileHelper.createTempDirectory(this);
 
         processor = new SimpleCopyProcessor(targetDirectory);
 
-        Path sourceDirectory = Files.createTempDirectory(PREFIX);
-        logger.debug("Creating source dir {}", sourceDirectory);
-
-
+        Path sourceDirectory = FileHelper.createTempDirectory(this);
         Context context = new Context(Source.SCANNER, sourceDirectory);
 
-        Path file = Files.createTempFile(sourceDirectory, PREFIX, ".pdf");
-        logger.debug("Creating file {}", file);
+        Path file = FileHelper.createTempFile(sourceDirectory, this);
 
         processor.processFile(file.getFileName(), context);
 
@@ -61,9 +51,7 @@ public class SimpleCopyProcessorTest {
         assertTrue(Files.exists(targetDirectory.resolve(file.getFileName())));
 
         // Clean-up
-        Files.deleteIfExists(file);
-        Files.deleteIfExists(sourceDirectory);
-        Files.deleteIfExists(targetDirectory.resolve(file.getFileName()));
-        Files.deleteIfExists(targetDirectory);
+        FileHelper.deleteDir(sourceDirectory, this);
+        FileHelper.deleteDir(targetDirectory, this);
     }
 }
