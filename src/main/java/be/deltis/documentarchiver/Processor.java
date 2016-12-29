@@ -15,10 +15,12 @@
  */
 package be.deltis.documentarchiver;
 
+import java.nio.file.Path;
+
 /**
  * Created by benoit on 17/07/14.
  */
 public interface Processor {
 
-    void processFile(String filename) ;
+    void processFile(Path filename, Context context) ;
 }

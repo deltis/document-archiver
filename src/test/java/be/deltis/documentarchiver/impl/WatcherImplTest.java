@@ -20,7 +20,6 @@ import be.deltis.documentarchiver.Processor;
 import be.deltis.documentarchiver.Source;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +29,9 @@ import org.testng.annotations.Test;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by benoit on 18/03/14.
@@ -56,7 +58,7 @@ public class WatcherImplTest {
         Path testDir = Files.createTempDirectory(PREFIX);
         logger.debug("Creating dir {}", testDir);
 
-        watcher.setContexts(Collections.singletonList(new Context(Source.EMAIL, testDir.toString())));
+        watcher.setContexts(Collections.singletonList(new Context(Source.EMAIL, testDir)));
         watcher.setSuffix(".pdf");
 
 
@@ -64,7 +66,7 @@ public class WatcherImplTest {
         logger.debug("Creating file {}", testFile);
 
         watcher.takeOneFile();
-        Mockito.verify(processor).processFile(Mockito.anyString());
+        verify(processor).processFile(any(Path.class), any(Context.class));
 
         Files.deleteIfExists(testFile);
         Files.deleteIfExists(testDir);

@@ -15,18 +15,20 @@
  */
 package be.deltis.documentarchiver;
 
+import java.nio.file.Path;
+
 /**
  * Created by benoit on 17/07/14.
  */
 public class Context {
 
     private Source source ;
-    private String directory;
+    private Path directory;
 
     public Context() {
     }
 
-    public Context(Source source, String directory) {
+    public Context(Source source, Path directory) {
         this.source = source;
         this.directory = directory;
     }
@@ -39,11 +41,11 @@ public class Context {
         this.source = source;
     }
 
-    public String getDirectory() {
+    public Path getDirectory() {
         return directory;
     }
 
-    public void setDirectory(String directory) {
+    public void setDirectory(Path directory) {
         this.directory = directory;
     }
 }

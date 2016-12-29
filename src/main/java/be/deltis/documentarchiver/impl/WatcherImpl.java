@@ -60,24 +60,14 @@ public class WatcherImpl implements Watcher {
     public void setContexts(List<Context> contexts) {
         for (Context context : contexts) {
             logger.info("Starting to watch directory {}", context.getDirectory());
-            Path dirPath = FileSystems.getDefault().getPath(context.getDirectory());
-            contextMap.put(dirPath, context);
+            Path directory = context.getDirectory();
+            contextMap.put(directory, context);
             try {
-                dirPath.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
+                directory.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
             } catch (IOException ioe) {
-                RuntimeException re = new RuntimeException("Failed to register the directory", ioe);
-                logger.error("Failed to register the directory", re);
-                throw re;
+                throw new RuntimeException("Failed to register the directory", ioe);
             }
         }
-    }
-
-    public Processor getProcessor() {
-        return processor;
-    }
-
-    public void setProcessor(Processor processor) {
-        this.processor = processor;
     }
 
     public boolean takeOneFile() {
@@ -99,17 +89,19 @@ public class WatcherImpl implements Watcher {
             if (kind == OVERFLOW) {
                 continue;
             }
-
+            Path directory = (Path) key.watchable();
             // The filename is the
             // context of the event.
             WatchEvent<Path> ev = (WatchEvent<Path>) event;
             Path filename = ev.context();
             if (filename.toString().endsWith(suffix)) {
-                processor.processFile(filename.toString());
+                Context context = contextMap.get(directory);
+                processor.processFile(filename, context);
             }
         }
         return key.reset();
     }
+
     @Override
     public void startProcessing() throws IOException {
         for (;;) {
