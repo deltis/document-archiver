@@ -15,9 +15,9 @@
  */
 package be.deltis.documentarchiver.impl;
 
-import be.deltis.documentarchiver.context.Context;
 import be.deltis.documentarchiver.Processor;
 import be.deltis.documentarchiver.Watcher;
+import be.deltis.documentarchiver.context.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

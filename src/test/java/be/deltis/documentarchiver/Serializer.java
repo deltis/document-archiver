@@ -15,14 +15,13 @@
  */
 package be.deltis.documentarchiver;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-
-import org.testng.annotations.Test;
-
 import be.deltis.documentarchiver.model.DocumentModel;
 import be.deltis.documentarchiver.model.DocumentType;
 import be.deltis.documentarchiver.model.OriginalFormat;
+import org.testng.annotations.Test;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 
 @SuppressWarnings("restriction")
 public class Serializer {
