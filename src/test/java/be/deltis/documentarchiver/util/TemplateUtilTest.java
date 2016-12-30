@@ -16,6 +16,7 @@
 package be.deltis.documentarchiver.util;
 
 import be.deltis.documentarchiver.model.Document;
+import be.deltis.documentarchiver.model.DocumentModel;
 import be.deltis.documentarchiver.model.DocumentType;
 import be.deltis.documentarchiver.model.OriginalFormat;
 import org.testng.Assert;
@@ -35,12 +36,13 @@ public class TemplateUtilTest {
 
     @Test(dataProvider = "templates")
     public void process(String templateId, String expectedResult) {
-        Document document = new Document();
-        document.setDocumentType(DocumentType.INVOICE_PURCHASE);
-        document.setOriginalFormat(OriginalFormat.ELECTRONIC);
-        document.setName("securex-precompte");
-        document.setSupplier("Securex");
-        document.setDate(LocalDate.of(2016, Month.DECEMBER, 20));
+        DocumentModel documentModel = new DocumentModel();
+        documentModel.setDocumentType(DocumentType.INVOICE_PURCHASE);
+        documentModel.setOriginalFormat(OriginalFormat.ELECTRONIC);
+        documentModel.setName("securex-precompte");
+        documentModel.setSupplier("Securex");
+
+        Document document = new Document(documentModel, LocalDate.of(2016, Month.DECEMBER, 20));
 
         String actualResult = templateUtil.process(document, templateId);
         Assert.assertEquals(actualResult, expectedResult);
