@@ -12,7 +12,22 @@ public class DocumentModel {
 	private String supplier ;
 	private OriginalFormat originalFormat ;
 	private String fileNameRegExp ;
-		
+
+    public DocumentModel() {
+    }
+
+    /**
+	 * Copy constructor.
+	 * @param other the DocumentModel to copy values from
+	 */
+	DocumentModel(DocumentModel other) {
+        this.name = other.name ;
+        this.documentType = other.documentType ;
+        this.supplier = other.supplier ;
+        this.originalFormat = other.originalFormat ;
+        this.fileNameRegExp = other.fileNameRegExp ;
+	}
+
 	public String getName() {
 		return name;
 	}

@@ -1,0 +1,1 @@
+/tmp/document-archiver/${documentType}/${supplier}/${date.year?string["####"]}
