@@ -22,6 +22,8 @@ import be.deltis.documentarchiver.helper.FileHelper;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -36,10 +38,12 @@ import static org.mockito.Mockito.verify;
  */
 
 @Test
+@ContextConfiguration(locations = { "classpath:spring-test-config.xml" })
 public class WatcherImplTest {
 
+    @Autowired
     @InjectMocks
-    private WatcherImpl watcher = new WatcherImpl();
+    private WatcherImpl watcher ;
 
     @Mock
     private Processor processor ;

@@ -50,6 +50,10 @@ dependencies {
     compile group: 'ch.qos.logback', name: 'logback-classic', version:'1.1.8'
     compile group: 'ch.qos.logback', name: 'logback-core', version:'1.1.8'
     compile group: 'org.freemarker', name: 'freemarker', version: '2.3.23'
+    compile group: 'org.springframework', name: 'spring-core', version: '4.3.5.RELEASE'
+    compile group: 'org.springframework', name: 'spring-beans', version: '4.3.5.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version: '4.3.5.RELEASE'
+    testCompile group: 'org.springframework', name: 'spring-test', version: '4.3.5.RELEASE'
     testCompile group: 'org.testng', name: 'testng', version:'6.9.10'
     testCompile group: 'org.mockito', name: 'mockito-core', version:'2.4.4'
 }

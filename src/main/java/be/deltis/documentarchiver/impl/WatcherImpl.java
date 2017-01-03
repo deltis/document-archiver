@@ -20,6 +20,7 @@ import be.deltis.documentarchiver.Watcher;
 import be.deltis.documentarchiver.context.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -32,6 +33,7 @@ import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 /**
  * Created by benoit on 18/03/14.
  */
+@Component
 public class WatcherImpl implements Watcher {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -103,7 +105,7 @@ public class WatcherImpl implements Watcher {
     }
 
     @Override
-    public void startProcessing() throws IOException {
+    public void startProcessing() {
         for (;;) {
             boolean valid = takeOneFile() ;
             if (!valid) {
