@@ -15,6 +15,7 @@
  */
 package be.deltis.documentarchiver.helper;
 
+import be.deltis.documentarchiver.exception.DocArchiverException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +34,7 @@ public class FileHelper {
             logger(context).debug("Creating dir {}", dir);
             return dir ;
         } catch (IOException ioe) {
-            throw new RuntimeException("Failed to create temp dir", ioe);
+            throw new DocArchiverException("Failed to create temp dir", ioe);
         }
     }
 
@@ -43,7 +44,7 @@ public class FileHelper {
             logger(context).debug("Creating file {}", file);
             return file;
         } catch (IOException ioe) {
-            throw new RuntimeException("Failed to create temp file", ioe);
+            throw new DocArchiverException("Failed to create temp file", ioe);
         }
     }
 
@@ -56,7 +57,7 @@ public class FileHelper {
                 logger(context).debug("Deleted {}", p);
             }
         } catch (IOException ioe) {
-            throw new RuntimeException("Failed to delete dir", ioe);
+            throw new DocArchiverException("Failed to delete dir", ioe);
         }
     }
 

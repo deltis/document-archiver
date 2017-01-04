@@ -17,6 +17,7 @@ package be.deltis.documentarchiver.impl;
 
 import be.deltis.documentarchiver.Processor;
 import be.deltis.documentarchiver.context.Context;
+import be.deltis.documentarchiver.exception.DocArchiverException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -36,7 +37,7 @@ public class SimpleCopyProcessor implements Processor {
             Path source = context.getDirectory().resolve(filename);
             Files.copy(source, targetDirectory.resolve(source.getFileName()));
         } catch (IOException ioe) {
-            throw new RuntimeException(String.format("Failed to move file %s", filename), ioe);
+            throw new DocArchiverException(String.format("Failed to move file %s", filename), ioe);
         }
     }
 }

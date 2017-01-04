@@ -33,12 +33,10 @@ import static org.testng.Assert.assertTrue;
 @Test
 public class SimpleCopyProcessorTest {
 
-    private Processor processor ;
-
     public void copy() throws IOException {
         Path targetDirectory = FileHelper.createTempDirectory(this);
 
-        processor = new SimpleCopyProcessor(targetDirectory);
+        Processor processor = new SimpleCopyProcessor(targetDirectory);
 
         Path sourceDirectory = FileHelper.createTempDirectory(this);
         Context context = new Context(Source.SCANNER, sourceDirectory);

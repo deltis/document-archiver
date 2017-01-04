@@ -15,6 +15,7 @@
  */
 package be.deltis.documentarchiver.util;
 
+import be.deltis.documentarchiver.exception.DocArchiverException;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
@@ -46,7 +47,7 @@ public class TemplateUtil {
             cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
             cfg.setLogTemplateExceptions(false);
         } catch (Exception e) {
-            throw new RuntimeException(String.format("Failed to init freemarker configuration. dir=%s", dir.getAbsolutePath()), e) ;
+            throw new DocArchiverException(String.format("Failed to init freemarker configuration. dir=%s", dir.getAbsolutePath()), e) ;
         }
     }
 
@@ -57,7 +58,7 @@ public class TemplateUtil {
             template.process(dataModel, result);
             return result.toString();
         } catch (Exception e) {
-            throw new RuntimeException(String.format("Failed to process template %s", templateId), e) ;
+            throw new DocArchiverException(String.format("Failed to process template %s", templateId), e) ;
         }
     }
 }

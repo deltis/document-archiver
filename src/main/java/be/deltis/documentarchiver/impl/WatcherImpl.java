@@ -18,6 +18,7 @@ package be.deltis.documentarchiver.impl;
 import be.deltis.documentarchiver.Processor;
 import be.deltis.documentarchiver.Watcher;
 import be.deltis.documentarchiver.context.Context;
+import be.deltis.documentarchiver.exception.DocArchiverException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -47,7 +48,7 @@ public class WatcherImpl implements Watcher {
         try {
             watcher = FileSystems.getDefault().newWatchService();
         } catch (IOException ioe) {
-            throw new RuntimeException("Failed to create new watch service", ioe);
+            throw new DocArchiverException("Failed to create new watch service", ioe);
         }
     }
 
@@ -67,7 +68,7 @@ public class WatcherImpl implements Watcher {
             try {
                 directory.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
             } catch (IOException ioe) {
-                throw new RuntimeException("Failed to register the directory", ioe);
+                throw new DocArchiverException("Failed to register the directory", ioe);
             }
         }
     }
