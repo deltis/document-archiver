@@ -19,6 +19,7 @@ import be.deltis.documentarchiver.DocumentModelDetector;
 import be.deltis.documentarchiver.Processor;
 import be.deltis.documentarchiver.context.Context;
 import be.deltis.documentarchiver.context.Source;
+import be.deltis.documentarchiver.exception.DocArchiverException;
 import be.deltis.documentarchiver.helper.FileHelper;
 import be.deltis.documentarchiver.model.Document;
 import be.deltis.documentarchiver.model.DocumentModel;
@@ -67,6 +68,7 @@ public class StructuredCopyProcessorTest {
         MockitoAnnotations.initMocks(this);
     }
 
+    @Test
     public void copy() throws IOException {
 
         Path sourceDirectory = FileHelper.createTempDirectory(this);
@@ -88,6 +90,26 @@ public class StructuredCopyProcessorTest {
         FileHelper.deleteDir(rootDir, this);
     }
 
+    @Test(expectedExceptions = DocArchiverException.class)
+    public void copyNoModel() throws IOException {
+
+        Path sourceDirectory = FileHelper.createTempDirectory(this);
+        Context context = new Context(Source.SCANNER, sourceDirectory);
+
+        Path file = FileHelper.createTempFile(sourceDirectory, this);
+
+        when(templateUtil.process(any(), eq("dir.ftlh"))).thenReturn("INVOICE_PURCHASE/Securex/2016");
+        when(templateUtil.process(any(), eq("file.ftlh"))).thenReturn("2016-12-20.pdf");
+
+        processor.processFile(file.getFileName(), context);
+
+        assertTrue(Files.exists(context.getDirectory().resolve(file.getFileName())));
+        assertTrue(Files.exists(rootDir.resolve("INVOICE_PURCHASE/Securex/2016/2016-12-20.pdf")));
+
+        // Clean-up
+        FileHelper.deleteDir(sourceDirectory, this);
+        FileHelper.deleteDir(rootDir, this);
+    }
     private Document document() {
         DocumentModel documentModel = new DocumentModel();
         documentModel.setDocumentType(DocumentType.INVOICE_PURCHASE);

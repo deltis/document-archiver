@@ -24,9 +24,6 @@ public class Document extends DocumentModel {
 
     private LocalDate date ;
 
-    public Document() {
-    }
-
     public Document(DocumentModel model, LocalDate date) {
         super(model);
         this.date = date;

@@ -20,9 +20,6 @@ package be.deltis.documentarchiver.exception;
  */
 public class DocArchiverException extends RuntimeException {
 
-    public DocArchiverException() {
-    }
-
     public DocArchiverException(String message) {
         super(message);
     }
@@ -31,11 +28,4 @@ public class DocArchiverException extends RuntimeException {
         super(message, cause);
     }
 
-    public DocArchiverException(Throwable cause) {
-        super(cause);
-    }
-
-    public DocArchiverException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
 }
