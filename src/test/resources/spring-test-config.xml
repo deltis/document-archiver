@@ -12,8 +12,5 @@
     <bean scope="singleton" class="be.deltis.documentarchiver.util.TemplateUtil">
         <constructor-arg value="src/test/resources/templates"/>
     </bean>
-    <bean scope="singleton" class="be.deltis.documentarchiver.impl.SimpleCopyProcessor">
-        <constructor-arg value="/tmp"/>
-    </bean>
 
 </beans>
