@@ -15,29 +15,20 @@
  */
 package be.deltis.documentarchiver.impl;
 
-import be.deltis.documentarchiver.Processor;
+import be.deltis.documentarchiver.DocumentModelDetector;
 import be.deltis.documentarchiver.context.Context;
-import be.deltis.documentarchiver.exception.DocArchiverException;
+import be.deltis.documentarchiver.model.DocumentModel;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
-public class SimpleCopyProcessor implements Processor {
-
-    private Path targetDir;
-
-    public SimpleCopyProcessor(Path targetDir) {
-        this.targetDir = targetDir;
-    }
+/**
+ * Created by benoit on 29/12/16 - 16:46.
+ */
+public class DocumentModelDetectorImpl implements DocumentModelDetector {
 
     @Override
-    public void processFile(Path filename, Context context) {
-        try {
-            Path source = context.getDirectory().resolve(filename);
-            Files.copy(source, targetDir.resolve(source.getFileName()));
-        } catch (IOException ioe) {
-            throw new DocArchiverException(String.format("Failed to copy file %s", filename), ioe);
-        }
+    public List<DocumentModel> searchModels(Path filename, Context context) {
+        return null;
     }
 }

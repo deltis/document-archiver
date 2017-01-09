@@ -29,6 +29,9 @@ import org.testng.annotations.Test;
 import java.time.LocalDate;
 import java.time.Month;
 
+import static be.deltis.documentarchiver.TestConstants.DIR_TEMPLATE_ID;
+import static be.deltis.documentarchiver.TestConstants.FILE_TEMPLATE_ID;
+
 /**
  * Created by benoit on 30/12/16 - 17:03.
  */
@@ -56,8 +59,8 @@ public class TemplateUtilTest extends AbstractTestNGSpringContextTests {
     @DataProvider(name = "templates")
     public Object[][] templates() {
         return new Object[][]{
-                new Object[]{ "dir.ftlh", "/tmp/document-archiver/INVOICE_PURCHASE/Securex/2016"},
-                new Object[]{ "file.ftlh", "2016-12-20.pdf"}
+                new Object[]{DIR_TEMPLATE_ID, "/tmp/document-archiver/INVOICE_PURCHASE/Securex/2016"},
+                new Object[]{FILE_TEMPLATE_ID, "2016-12-20.pdf"}
         };
     }
 }
