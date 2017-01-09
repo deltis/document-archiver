@@ -28,18 +28,9 @@ import java.io.StringWriter;
  */
 public class TemplateUtil {
 
-    private static TemplateUtil instance ;
-
     private Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
 
-    public static TemplateUtil getInstance(String templateDir) {
-        if (instance == null) {
-            instance = new TemplateUtil(templateDir);
-        }
-        return instance ;
-    }
-
-    private TemplateUtil(String templateDir) {
+    public TemplateUtil(String templateDir) {
         File dir = new File(templateDir) ;
         try {
             cfg.setDirectoryForTemplateLoading(dir);

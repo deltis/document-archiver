@@ -19,6 +19,9 @@ import be.deltis.documentarchiver.model.Document;
 import be.deltis.documentarchiver.model.DocumentModel;
 import be.deltis.documentarchiver.model.DocumentType;
 import be.deltis.documentarchiver.model.OriginalFormat;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -30,9 +33,11 @@ import java.time.Month;
  * Created by benoit on 30/12/16 - 17:03.
  */
 @Test
-public class TemplateUtilTest {
+@ContextConfiguration(locations = { "classpath:spring-test-config.xml" })
+public class TemplateUtilTest extends AbstractTestNGSpringContextTests {
 
-    private TemplateUtil templateUtil = TemplateUtil.getInstance("src/test/resources/templates");
+    @Autowired
+    private TemplateUtil templateUtil ;
 
     @Test(dataProvider = "templates")
     public void process(String templateId, String expectedResult) {

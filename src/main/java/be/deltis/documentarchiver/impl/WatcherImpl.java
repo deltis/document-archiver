@@ -21,7 +21,7 @@ import be.deltis.documentarchiver.context.Context;
 import be.deltis.documentarchiver.exception.DocArchiverException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -34,11 +34,11 @@ import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 /**
  * Created by benoit on 18/03/14.
  */
-@Component
 public class WatcherImpl implements Watcher {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
     private String suffix;
+    @Autowired
     private Processor processor;
     private WatchService watcher ;
 
