@@ -12,7 +12,7 @@ Java 8, Gradle, Spring, testng, mockito, freemarker, etc.
 
 [![Build Status](https://travis-ci.org/deltis/document-archiver.svg)](https://travis-ci.org/deltis/document-archiver)
 
-[![Code Coverage](https://img.shields.io/codecov/c/github/deltis/document-archiver.svg)](https://codecov.io/github/deltis/document-archiver)
+[![Code Coverage](https://codecov.io/gh/deltis/document-archiver/branch/master/graph/badge.svg)](https://codecov.io/github/deltis/document-archiver)
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/benoitdevos/document-archiver/blob/master/LICENSE)
 
