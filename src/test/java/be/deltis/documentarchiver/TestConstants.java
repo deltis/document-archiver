@@ -19,7 +19,7 @@ package be.deltis.documentarchiver;
 /**
  * Created by benoit on 9/01/17 - 16:13.
  */
-public class TestConstants {
+public final class TestConstants {
 
     public static final String DIR_TEMPLATE_ID = "dir.ftlh";
 

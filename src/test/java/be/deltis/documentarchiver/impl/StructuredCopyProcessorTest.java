@@ -18,7 +18,6 @@ package be.deltis.documentarchiver.impl;
 
 import be.deltis.documentarchiver.DocumentModelDetector;
 import be.deltis.documentarchiver.Processor;
-import be.deltis.documentarchiver.TestConstants;
 import be.deltis.documentarchiver.context.Context;
 import be.deltis.documentarchiver.context.Source;
 import be.deltis.documentarchiver.exception.DocArchiverException;
@@ -76,8 +75,8 @@ public class StructuredCopyProcessorTest {
     @Test
     public void copy() throws IOException {
         when(documentModelDetector.searchModels(any(Path.class), any(Context.class))).thenReturn(Collections.singletonList(document()));
-        when(templateUtil.process(any(), eq("dir.ftlh"))).thenReturn("INVOICE_PURCHASE/Securex/2016");
-        when(templateUtil.process(any(), eq("file.ftlh"))).thenReturn("2016-12-20.pdf");
+        when(templateUtil.process(any(), eq(DIR_TEMPLATE_ID))).thenReturn("INVOICE_PURCHASE/Securex/2016");
+        when(templateUtil.process(any(), eq(FILE_TEMPLATE_ID))).thenReturn("2016-12-20.pdf");
 
         Path sourceDirectory = FileHelper.createTempDirectory(this);
         Context context = new Context(Source.SCANNER, sourceDirectory);
@@ -101,8 +100,8 @@ public class StructuredCopyProcessorTest {
 
         Path file = FileHelper.createTempFile(sourceDirectory, this);
 
-        when(templateUtil.process(any(), eq(TestConstants.DIR_TEMPLATE_ID))).thenReturn("INVOICE_PURCHASE/Securex/2016");
-        when(templateUtil.process(any(), eq(TestConstants.FILE_TEMPLATE_ID))).thenReturn("2016-12-20.pdf");
+        when(templateUtil.process(any(), eq(DIR_TEMPLATE_ID))).thenReturn("INVOICE_PURCHASE/Securex/2016");
+        when(templateUtil.process(any(), eq(FILE_TEMPLATE_ID))).thenReturn("2016-12-20.pdf");
 
         processor.processFile(file.getFileName(), context);
 
