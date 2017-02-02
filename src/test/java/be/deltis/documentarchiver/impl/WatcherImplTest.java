@@ -49,12 +49,12 @@ public class WatcherImplTest {
     @Mock
     private Processor processor;
 
+    public WatcherImplTest() {
+    }
+
     @BeforeMethod
     public void injectMocks() {
         MockitoAnnotations.initMocks(this);
-    }
-
-    public WatcherImplTest() {
     }
 
     public void takeOneFile() throws Exception {

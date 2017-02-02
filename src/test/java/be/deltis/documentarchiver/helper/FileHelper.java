@@ -27,7 +27,7 @@ import java.nio.file.Path;
 /**
  * Created by benoit on 29/12/16 - 14:52.
  */
-public class FileHelper {
+public final class FileHelper {
 
     private FileHelper() {
     }
