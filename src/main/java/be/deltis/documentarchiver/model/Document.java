@@ -22,7 +22,7 @@ import java.time.LocalDate;
  */
 public class Document extends DocumentModel {
 
-    private LocalDate date ;
+    private LocalDate date;
 
     public Document(DocumentModel model, LocalDate date) {
         super(model);

@@ -32,7 +32,7 @@ public class FileHelper {
         try {
             Path dir = Files.createTempDirectory("document-archiver-" + context.getClass().getSimpleName() + "-");
             logger(context).debug("Creating dir {}", dir);
-            return dir ;
+            return dir;
         } catch (IOException ioe) {
             throw new DocArchiverException("Failed to create temp dir", ioe);
         }

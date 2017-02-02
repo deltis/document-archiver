@@ -36,11 +36,11 @@ import static be.deltis.documentarchiver.TestConstants.FILE_TEMPLATE_ID;
  * Created by benoit on 30/12/16 - 17:03.
  */
 @Test
-@ContextConfiguration(locations = { "classpath:spring-test-config.xml" })
+@ContextConfiguration(locations = {"classpath:spring-test-config.xml"})
 public class TemplateUtilTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    private TemplateUtil templateUtil ;
+    private TemplateUtil templateUtil;
 
     @Test(dataProvider = "templates")
     public void process(String templateId, String expectedResult) {

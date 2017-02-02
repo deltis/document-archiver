@@ -25,7 +25,7 @@ import org.testng.annotations.Test;
 @Test
 public class LoggerTest {
 
-    private Logger logger = LoggerFactory.getLogger(LoggerTest.class) ;
+    private Logger logger = LoggerFactory.getLogger(LoggerTest.class);
 
     public void info() {
         logger.info("Info:{}", logger.isInfoEnabled());

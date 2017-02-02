@@ -40,7 +40,7 @@ public class WatcherImpl implements Watcher {
     private String suffix;
     @Autowired
     private Processor processor;
-    private WatchService watcher ;
+    private WatchService watcher;
 
     private Map<Path, Context> contextMap = new HashMap<>();
 
@@ -107,10 +107,10 @@ public class WatcherImpl implements Watcher {
 
     @Override
     public void startProcessing() {
-        for (;;) {
-            boolean valid = takeOneFile() ;
+        for (; ; ) {
+            boolean valid = takeOneFile();
             if (!valid) {
-                break ;
+                break;
             }
         }
     }

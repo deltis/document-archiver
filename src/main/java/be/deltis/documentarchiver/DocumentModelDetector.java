@@ -26,5 +26,5 @@ import java.util.List;
  */
 public interface DocumentModelDetector {
 
-    List<DocumentModel> searchModels(Path filename, Context context) ;
+    List<DocumentModel> searchModels(Path filename, Context context);
 }

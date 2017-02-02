@@ -36,11 +36,11 @@ import java.util.List;
 public class StructuredCopyProcessor implements Processor {
 
     private Path targetRootDir;
-    private String templateIdDir ;
-    private String templateIdFile ;
+    private String templateIdDir;
+    private String templateIdFile;
 
     @Autowired
-    private DocumentModelDetector documentModelDetector ;
+    private DocumentModelDetector documentModelDetector;
     @Autowired
     private TemplateUtil templateUtil;
 
@@ -52,7 +52,7 @@ public class StructuredCopyProcessor implements Processor {
 
     @Override
     public void processFile(Path filename, Context context) {
-        List<DocumentModel> documentModels = documentModelDetector.searchModels(filename, context) ;
+        List<DocumentModel> documentModels = documentModelDetector.searchModels(filename, context);
         if (documentModels == null || documentModels.isEmpty()) {
             throw new DocArchiverException("No document model found.");
         }
@@ -69,7 +69,7 @@ public class StructuredCopyProcessor implements Processor {
     }
 
     private LocalDate askForDate() {
-        return LocalDate.now() ;
+        return LocalDate.now();
     }
 
     private void processDocument(Document document, Path filename, Context context) {
@@ -77,7 +77,7 @@ public class StructuredCopyProcessor implements Processor {
         String file = templateUtil.process(document, templateIdFile);
         try {
             Path source = context.getDirectory().resolve(filename);
-            Path targetDir = targetRootDir.resolve(dir) ;
+            Path targetDir = targetRootDir.resolve(dir);
             if (!Files.exists(targetDir)) {
                 Files.createDirectories(targetDir);
             }

@@ -58,7 +58,7 @@ public class StructuredCopyProcessorTest {
     private Processor processor = new StructuredCopyProcessor(rootDir, DIR_TEMPLATE_ID, FILE_TEMPLATE_ID);
 
     @Mock
-    private DocumentModelDetector documentModelDetector ;
+    private DocumentModelDetector documentModelDetector;
 
     @Mock
     private TemplateUtil templateUtil;
@@ -110,6 +110,7 @@ public class StructuredCopyProcessorTest {
         FileHelper.deleteDir(sourceDirectory, this);
         FileHelper.deleteDir(rootDir, this);
     }
+
     private Document document() {
         DocumentModel documentModel = new DocumentModel();
         documentModel.setDocumentType(DocumentType.INVOICE_PURCHASE);

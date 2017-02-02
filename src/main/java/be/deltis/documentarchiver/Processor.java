@@ -24,5 +24,5 @@ import java.nio.file.Path;
  */
 public interface Processor {
 
-    void processFile(Path filename, Context context) ;
+    void processFile(Path filename, Context context);
 }

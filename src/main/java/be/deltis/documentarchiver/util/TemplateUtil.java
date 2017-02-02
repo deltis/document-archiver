@@ -31,25 +31,25 @@ public class TemplateUtil {
     private Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
 
     public TemplateUtil(String templateDir) {
-        File dir = new File(templateDir) ;
+        File dir = new File(templateDir);
         try {
             cfg.setDirectoryForTemplateLoading(dir);
             cfg.setDefaultEncoding("UTF-8");
             cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
             cfg.setLogTemplateExceptions(false);
         } catch (Exception e) {
-            throw new DocArchiverException(String.format("Failed to init freemarker configuration. dir=%s", dir.getAbsolutePath()), e) ;
+            throw new DocArchiverException(String.format("Failed to init freemarker configuration. dir=%s", dir.getAbsolutePath()), e);
         }
     }
 
-    public String process(Object dataModel, String  templateId) {
+    public String process(Object dataModel, String templateId) {
         try {
             StringWriter result = new StringWriter();
             Template template = cfg.getTemplate(templateId);
             template.process(dataModel, result);
             return result.toString();
         } catch (Exception e) {
-            throw new DocArchiverException(String.format("Failed to process template %s", templateId), e) ;
+            throw new DocArchiverException(String.format("Failed to process template %s", templateId), e);
         }
     }
 }

@@ -38,15 +38,15 @@ import static org.mockito.Mockito.verify;
  */
 
 @Test
-@ContextConfiguration(locations = { "classpath:spring-test-config.xml" })
+@ContextConfiguration(locations = {"classpath:spring-test-config.xml"})
 public class WatcherImplTest {
 
     @Autowired
     @InjectMocks
-    private WatcherImpl watcher ;
+    private WatcherImpl watcher;
 
     @Mock
-    private Processor processor ;
+    private Processor processor;
 
     @BeforeMethod
     public void injectMocks() {

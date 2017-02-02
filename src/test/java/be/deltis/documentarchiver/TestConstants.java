@@ -20,6 +20,6 @@ package be.deltis.documentarchiver;
  */
 public class TestConstants {
 
-    public static final String DIR_TEMPLATE_ID = "dir.ftlh" ;
-    public static final String FILE_TEMPLATE_ID = "file.ftlh" ;
+    public static final String DIR_TEMPLATE_ID = "dir.ftlh";
+    public static final String FILE_TEMPLATE_ID = "file.ftlh";
 }
