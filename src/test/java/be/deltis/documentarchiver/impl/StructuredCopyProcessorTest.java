@@ -53,6 +53,12 @@ import static org.testng.Assert.assertTrue;
 @Test
 public class StructuredCopyProcessorTest {
 
+    public static final String DIR = "INVOICE_PURCHASE/Securex/2016";
+
+    public static final String FILE = "2016-12-20.pdf";
+
+    public static final String FULL_FILE_PATH = "INVOICE_PURCHASE/Securex/2016/2016-12-20.pdf";
+
     private Path rootDir = FileHelper.createTempDirectory(this);
 
     @InjectMocks
@@ -75,8 +81,8 @@ public class StructuredCopyProcessorTest {
     @Test
     public void copy() throws IOException {
         when(documentModelDetector.searchModels(any(Path.class), any(Context.class))).thenReturn(Collections.singletonList(document()));
-        when(templateUtil.process(any(), eq(DIR_TEMPLATE_ID))).thenReturn("INVOICE_PURCHASE/Securex/2016");
-        when(templateUtil.process(any(), eq(FILE_TEMPLATE_ID))).thenReturn("2016-12-20.pdf");
+        when(templateUtil.process(any(), eq(DIR_TEMPLATE_ID))).thenReturn(DIR);
+        when(templateUtil.process(any(), eq(FILE_TEMPLATE_ID))).thenReturn(FILE);
 
         Path sourceDirectory = FileHelper.createTempDirectory(this);
         Context context = new Context(Source.SCANNER, sourceDirectory);
@@ -85,7 +91,7 @@ public class StructuredCopyProcessorTest {
         processor.processFile(file.getFileName(), context);
 
         assertTrue(Files.exists(context.getDirectory().resolve(file.getFileName())));
-        assertTrue(Files.exists(rootDir.resolve("INVOICE_PURCHASE/Securex/2016/2016-12-20.pdf")));
+        assertTrue(Files.exists(rootDir.resolve(FULL_FILE_PATH)));
 
         // Clean-up
         FileHelper.deleteDir(sourceDirectory, this);
@@ -100,13 +106,13 @@ public class StructuredCopyProcessorTest {
 
         Path file = FileHelper.createTempFile(sourceDirectory, this);
 
-        when(templateUtil.process(any(), eq(DIR_TEMPLATE_ID))).thenReturn("INVOICE_PURCHASE/Securex/2016");
-        when(templateUtil.process(any(), eq(FILE_TEMPLATE_ID))).thenReturn("2016-12-20.pdf");
+        when(templateUtil.process(any(), eq(DIR_TEMPLATE_ID))).thenReturn(DIR);
+        when(templateUtil.process(any(), eq(FILE_TEMPLATE_ID))).thenReturn(FILE);
 
         processor.processFile(file.getFileName(), context);
 
         assertTrue(Files.exists(context.getDirectory().resolve(file.getFileName())));
-        assertTrue(Files.exists(rootDir.resolve("INVOICE_PURCHASE/Securex/2016/2016-12-20.pdf")));
+        assertTrue(Files.exists(rootDir.resolve(FULL_FILE_PATH)));
 
         // Clean-up
         FileHelper.deleteDir(sourceDirectory, this);
