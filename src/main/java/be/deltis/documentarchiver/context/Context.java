@@ -24,6 +24,7 @@ import java.nio.file.Path;
 public class Context {
 
     private Source source;
+
     private Path directory;
 
     public Context() {

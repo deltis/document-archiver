@@ -37,11 +37,14 @@ import java.util.List;
 public class StructuredCopyProcessor implements Processor {
 
     private Path targetRootDir;
+
     private String templateIdDir;
+
     private String templateIdFile;
 
     @Autowired
     private DocumentModelDetector documentModelDetector;
+
     @Autowired
     private TemplateUtil templateUtil;
 

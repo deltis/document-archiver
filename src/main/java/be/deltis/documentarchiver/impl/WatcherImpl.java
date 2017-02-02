@@ -38,9 +38,12 @@ import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 public class WatcherImpl implements Watcher {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
+
     private String suffix;
+
     @Autowired
     private Processor processor;
+
     private WatchService watcher;
 
     private Map<Path, Context> contextMap = new HashMap<>();

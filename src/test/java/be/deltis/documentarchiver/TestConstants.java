@@ -13,6 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
 package be.deltis.documentarchiver;
 
 /**
@@ -21,5 +22,6 @@ package be.deltis.documentarchiver;
 public class TestConstants {
 
     public static final String DIR_TEMPLATE_ID = "dir.ftlh";
+
     public static final String FILE_TEMPLATE_ID = "file.ftlh";
 }

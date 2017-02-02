@@ -24,9 +24,13 @@ import javax.xml.bind.annotation.XmlType;
 public class DocumentModel {
 
     private String name;
+
     private DocumentType documentType;
+
     private String supplier;
+
     private OriginalFormat originalFormat;
+
     private String fileNameRegExp;
 
     public DocumentModel() {
