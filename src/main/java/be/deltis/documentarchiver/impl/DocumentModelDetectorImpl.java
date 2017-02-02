@@ -28,6 +28,9 @@ import java.util.List;
  */
 public class DocumentModelDetectorImpl implements DocumentModelDetector {
 
+    public DocumentModelDetectorImpl() {
+    }
+
     @Override
     public List<DocumentModel> searchModels(Path filename, Context context) {
         return null;

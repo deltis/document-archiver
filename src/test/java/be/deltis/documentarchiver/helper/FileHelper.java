@@ -29,6 +29,9 @@ import java.nio.file.Path;
  */
 public class FileHelper {
 
+    private FileHelper() {
+    }
+
     public static Path createTempDirectory(Object context) {
         try {
             Path dir = Files.createTempDirectory("document-archiver-" + context.getClass().getSimpleName() + "-");

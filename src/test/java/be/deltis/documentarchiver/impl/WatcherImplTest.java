@@ -54,6 +54,9 @@ public class WatcherImplTest {
         MockitoAnnotations.initMocks(this);
     }
 
+    public WatcherImplTest() {
+    }
+
     public void takeOneFile() throws Exception {
         Path testDir = FileHelper.createTempDirectory(this);
 

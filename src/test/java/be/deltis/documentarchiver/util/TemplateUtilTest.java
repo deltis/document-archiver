@@ -43,6 +43,9 @@ public class TemplateUtilTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private TemplateUtil templateUtil;
 
+    public TemplateUtilTest() {
+    }
+
     @Test(dataProvider = "templates")
     public void process(String templateId, String expectedResult) {
         DocumentModel documentModel = new DocumentModel();

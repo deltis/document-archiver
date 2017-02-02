@@ -28,6 +28,9 @@ public class LoggerTest {
 
     private Logger logger = LoggerFactory.getLogger(LoggerTest.class);
 
+    public LoggerTest() {
+    }
+
     public void info() {
         logger.info("Info:{}", logger.isInfoEnabled());
     }

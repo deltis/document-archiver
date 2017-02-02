@@ -64,6 +64,9 @@ public class StructuredCopyProcessorTest {
     @Mock
     private TemplateUtil templateUtil;
 
+    public StructuredCopyProcessorTest() {
+    }
+
     @BeforeMethod
     public void injectMocks() {
         MockitoAnnotations.initMocks(this);

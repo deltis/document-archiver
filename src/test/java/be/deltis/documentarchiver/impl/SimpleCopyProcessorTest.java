@@ -34,6 +34,9 @@ import static org.testng.Assert.assertTrue;
 @Test
 public class SimpleCopyProcessorTest {
 
+    public SimpleCopyProcessorTest() {
+    }
+
     public void copy() throws IOException {
         Path targetDirectory = FileHelper.createTempDirectory(this);
 

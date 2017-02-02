@@ -27,6 +27,9 @@ import javax.xml.bind.Marshaller;
 @SuppressWarnings("restriction")
 public class Serializer {
 
+    public Serializer() {
+    }
+
     @Test
     public void marshal() throws Exception {
         DocumentModel dm = new DocumentModel();
